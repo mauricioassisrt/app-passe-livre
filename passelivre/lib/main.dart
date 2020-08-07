@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:passelivre/consulta.dart';
+import 'package:passelivre/solicita.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -35,16 +36,18 @@ class _PrincipalState extends State<Principal> {
           currentIndex: _index,
           items: [
             BottomNavigationBarItem(
-                icon: new Icon(Icons.directions_bus),
-                title: new Text("Solicitar Passe")),
+              icon: new Icon(Icons.directions_bus, color: Colors.green),
+              title: new Text("Solicitar Passe"),
+            ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search, color: Colors.green),
                 title: new Text("Consultar Situação ")),
           ]),
       // body is the majority of the screen.
       body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: new Container(
+          padding: const EdgeInsets.all(10.0),
           color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +84,7 @@ class _PrincipalState extends State<Principal> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  ConsultaPasse()));
+                                  SolicitaPasse()));
                     },
                     padding: const EdgeInsets.all(10.0),
                   )),
@@ -109,8 +112,11 @@ class _PrincipalState extends State<Principal> {
                 buttonColor: Colors.white60,
                 child: RaisedButton.icon(
                   icon: Icon(Icons.search),
-                  label:
-                      Text('Consultar Passe ', style: TextStyle(fontSize: 20)),
+                  label: Text('Consultar Passe ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -130,10 +136,8 @@ class _PrincipalState extends State<Principal> {
 }
 
 class PrincipalState extends State<Principal> {
-  int _index = 0;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     throw UnimplementedError();
   }
 }
