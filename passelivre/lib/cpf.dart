@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:passelivre/main.dart';
+import 'package:passelivre/dados.aluno.dart';
+import 'package:passelivre/dados.responsavel.dart';
 
 class PossuiCpf extends StatefulWidget {
   @override
@@ -84,7 +85,7 @@ class _PrincipalState extends State<PossuiCpf> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Principal()));
+                                    InformacaoAluno()));
                       },
                       padding: const EdgeInsets.all(15.0),
                     ),
@@ -109,7 +110,7 @@ class _PrincipalState extends State<PossuiCpf> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    Principal()));
+                                    InformacaoResponsavel()));
                       },
                       padding: const EdgeInsets.all(15.0),
                     ),

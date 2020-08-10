@@ -1,20 +1,31 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:passelivre/resultado.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:passelivre/cpf.dart';
 
-class ConsultaPasse extends StatefulWidget {
+class InformacaoAluno extends StatefulWidget {
   @override
-  _PrincipalState createState() => _PrincipalState();
+  State<StatefulWidget> createState() => new _InformacaoAlunoState();
 }
 
-class _PrincipalState extends State<ConsultaPasse> {
+class _InformacaoAlunoState extends State<InformacaoAluno> {
   int _index = 0;
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Passe Livre - Consultar Cadastro '),
+        title: Text(' Fotos dos documentos '),
         backgroundColor: Colors.green[500],
       ),
       backgroundColor: Colors.lightGreen[50],
@@ -28,26 +39,27 @@ class _PrincipalState extends State<ConsultaPasse> {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.directions_bus, color: Colors.green),
-              title: new Text("Solicitar  Passe"),
+              title: new Text("Solicitar Passe"),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search, color: Colors.green),
                 title: new Text("Consultar Situação ")),
           ]),
       // body is the majority of the screen.
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
         child: new Container(
           padding: const EdgeInsets.all(10.0),
           color: Colors.white,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 100,
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "PESQUISAR SITUAÇÃO DO CARTÃO  ",
+                  "AGORA  VAMOS TIRAR UMA FOTO DOS SEUS DOCUMENTOS PARA COMPLETAR O CADASTRO ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -57,29 +69,34 @@ class _PrincipalState extends State<ConsultaPasse> {
               Container(),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  "Caso já tenha realizado o cadastro, digite seu CPF do Aluno ou Responsával ",
-                  style: TextStyle(fontSize: 20),
-                ),
+                child: _image == null
+                    ? new Text('Nenhuma imagem selecionada ')
+                    : new Image.file(_image),
+              ),
+              FloatingActionButton(
+                onPressed: getImage,
+                tooltip: 'Pick Image',
+                child: new Icon(Icons.camera),
+              ),
+              Text(
+                "Agora com o comprovante de residencia RG, CPF e declaração de matricula em mãos vamos tirar fotos deles?",
+                style: TextStyle(fontSize: 20),
               ),
               TextField(
                   autofocus: true,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      icon:
-                          Icon(Icons.person_pin, size: 30, color: Colors.green),
-                      hintText: 'CPF do Responsavel ou Aluno'),
+                      icon: Icon(Icons.assignment_ind,
+                          size: 30, color: Colors.green),
+                      hintText: 'CPF DO Aluno '),
                   style: TextStyle(fontSize: 20)),
               ButtonTheme(
                 minWidth: double.infinity,
                 height: 50,
                 buttonColor: Colors.white60,
                 child: RaisedButton.icon(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.green,
-                  ),
-                  label: Text('Buscar ',
+                  icon: Icon(Icons.send),
+                  label: Text('Próximo ',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -88,7 +105,7 @@ class _PrincipalState extends State<ConsultaPasse> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => Resultado()));
+                            builder: (BuildContext context) => PossuiCpf()));
                   },
                   padding: const EdgeInsets.all(15.0),
                 ),

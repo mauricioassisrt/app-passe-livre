@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:passelivre/cpf.dart';
-import 'package:passelivre/main.dart';
 
 class SolicitaPasse extends StatefulWidget {
   @override

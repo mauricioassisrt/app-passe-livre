@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:passelivre/resultado.dart';
 
-class ConsultaPasse extends StatefulWidget {
+class Resultado extends StatefulWidget {
   @override
-  _PrincipalState createState() => _PrincipalState();
+  _ResultadoState createState() => _ResultadoState();
 }
 
-class _PrincipalState extends State<ConsultaPasse> {
+class _ResultadoState extends State<Resultado> {
   int _index = 0;
 
   @override
@@ -14,7 +13,7 @@ class _PrincipalState extends State<ConsultaPasse> {
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Passe Livre - Consultar Cadastro '),
+        title: Text('Passe Livre - Resultado'),
         backgroundColor: Colors.green[500],
       ),
       backgroundColor: Colors.lightGreen[50],
@@ -28,7 +27,7 @@ class _PrincipalState extends State<ConsultaPasse> {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.directions_bus, color: Colors.green),
-              title: new Text("Solicitar  Passe"),
+              title: new Text("Solicitar Passe"),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search, color: Colors.green),
@@ -58,39 +57,8 @@ class _PrincipalState extends State<ConsultaPasse> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "Caso já tenha realizado o cadastro, digite seu CPF do Aluno ou Responsával ",
+                  "Resultado e Situação do seu passe",
                   style: TextStyle(fontSize: 20),
-                ),
-              ),
-              TextField(
-                  autofocus: true,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      icon:
-                          Icon(Icons.person_pin, size: 30, color: Colors.green),
-                      hintText: 'CPF do Responsavel ou Aluno'),
-                  style: TextStyle(fontSize: 20)),
-              ButtonTheme(
-                minWidth: double.infinity,
-                height: 50,
-                buttonColor: Colors.white60,
-                child: RaisedButton.icon(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.green,
-                  ),
-                  label: Text('Buscar ',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Resultado()));
-                  },
-                  padding: const EdgeInsets.all(15.0),
                 ),
               ),
             ],
