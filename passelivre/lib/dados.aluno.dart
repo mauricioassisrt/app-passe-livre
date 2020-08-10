@@ -11,12 +11,35 @@ class InformacaoAluno extends StatefulWidget {
 
 class _InformacaoAlunoState extends State<InformacaoAluno> {
   int _index = 0;
-  File _image;
+  File _comprovanteResidencia, _rg, _cpf, _declaracao;
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+  Future getImageComprovanteResidencia() async {
+    var imageComprovanteResidencia =
+        await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
-      _image = image;
+      _comprovanteResidencia = imageComprovanteResidencia;
+    });
+  }
+
+  Future getImageRg() async {
+    var imagemRg = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _rg = imagemRg;
+    });
+  }
+
+  Future getImageCpf() async {
+    var imagemCpf = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _cpf = imagemCpf;
+    });
+  }
+
+  Future getImagemDeclaracao() async {
+    var imagemDeclaracao =
+        await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _declaracao = imagemDeclaracao;
     });
   }
 
@@ -67,19 +90,8 @@ class _InformacaoAlunoState extends State<InformacaoAluno> {
                 ),
               ),
               Container(),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _image == null
-                    ? new Text('Nenhuma imagem selecionada ')
-                    : new Image.file(_image),
-              ),
-              FloatingActionButton(
-                onPressed: getImage,
-                tooltip: 'Pick Image',
-                child: new Icon(Icons.camera),
-              ),
               Text(
-                "Agora com o comprovante de residencia RG, CPF e declaração de matricula em mãos vamos tirar fotos deles?",
+                "Agora com o comprovante de residencia RG, CPF e declaração de matrícula em mãos vamos tirar fotos deles?",
                 style: TextStyle(fontSize: 20),
               ),
               TextField(
@@ -90,6 +102,103 @@ class _InformacaoAlunoState extends State<InformacaoAluno> {
                           size: 30, color: Colors.green),
                       hintText: 'CPF DO Aluno '),
                   style: TextStyle(fontSize: 20)),
+              Text(
+                "COMPROVANTE DE RESIDÊNCIA ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: _comprovanteResidencia == null
+                    ? new Text('Nenhum comprovante de residencia SELECIONADO  ')
+                    : new Image.file(
+                        _comprovanteResidencia,
+                        width: 100,
+                        height: 100,
+                      ),
+              ),
+              FloatingActionButton(
+                onPressed: getImageComprovanteResidencia,
+                heroTag: 'btn-residencia',
+                tooltip: 'Pick Image',
+                child: new Icon(
+                  Icons.photo_camera,
+                ),
+              ),
+              Text(
+                "RG ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: _rg == null
+                    ? new Text('Nenhum RG SELECIONADO  ')
+                    : new Image.file(
+                        _rg,
+                        width: 100,
+                        height: 100,
+                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+              ),
+              FloatingActionButton(
+                onPressed: getImageRg,
+                heroTag: 'btn-rg',
+                tooltip: 'Pick Image',
+                child: new Icon(
+                  Icons.photo_camera,
+                ),
+              ),
+              Text(
+                "CPF ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: _cpf == null
+                    ? new Text('Nenhum CPF SELECIONADO  ')
+                    : new Image.file(
+                        _cpf,
+                        width: 100,
+                        height: 100,
+                      ),
+              ),
+              FloatingActionButton(
+                onPressed: getImageCpf,
+                tooltip: 'Pick Image',
+                heroTag: 'btn-cpf',
+                child: new Icon(
+                  Icons.photo_camera,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "DECLARAÇÃO DE MATRÍCULA",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: _declaracao == null
+                    ? new Text('Nenhum declaração de matrícula selecionada ')
+                    : new Image.file(
+                        _declaracao,
+                        width: 100,
+                        height: 100,
+                      ),
+              ),
+              FloatingActionButton(
+                onPressed: getImagemDeclaracao,
+                heroTag: 'btn-declaracao',
+                tooltip: 'Pick Image',
+                child: new Icon(
+                  Icons.photo_camera,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+              ),
               ButtonTheme(
                 minWidth: double.infinity,
                 height: 50,
